@@ -1,0 +1,77 @@
+{
+  "name": "python-plotly-server",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "forwardPorts": [5500],
+  "portsAttributes": {
+    "5500": {
+      "label": "Live Server",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ritwickdey.LiveServer",
+        "jkearins.action-buttons-ext"
+      ],
+      "settings": {
+        "tasks": {
+          "version": "2.0.0",
+          "tasks": [
+            {
+              "label": "open",
+              "type": "shell",
+              "command": "${command:extension.liveServer.goOnline}"
+            }
+          ]
+        },
+        "liveServer.settings.NoBrowser": false,
+        "liveServer.settings.donotShowInfoMsg": true,
+        "editor.minimap.enabled": false,
+        "chat.sendElementsToChat.enabled": false,
+        "actionButtons": {
+          "commands": [
+            {
+              "name": "🔁 MESSAGE DE BIENVENUE",
+              "singleInstance": true,
+              "useVsCodeApi": true,
+              "command": "bash .devcontainer/on-start.sh"
+            },
+            {
+              "name": "💻 TERMINAL",
+              "singleInstance": true,
+              "useVsCodeApi": true,
+              "command": "workbench.action.terminal.toggleTerminal",
+              "tooltip": "Open terminal"
+            },
+            {
+              "name": "🔎 SPLIT",
+              "singleInstance": true,
+              "useVsCodeApi": true,
+              "command": "workbench.action.moveEditorToNextGroup",
+              "tooltip": "Split editor"
+            },
+            {
+              "name": "🏠 PREVIEW",
+              "singleInstance": true,
+              "useVsCodeApi": true,
+              "command": "workbench.action.tasks.runTask",
+              "args": [
+                "open"
+              ],
+              "tooltip": "Start Live Server"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "remoteUser": "vscode"
+}
+
